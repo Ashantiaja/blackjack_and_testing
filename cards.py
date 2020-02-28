@@ -1,3 +1,7 @@
+# cards.py
+# @author: Ash Yveth Cudiamat
+
+# Dictionaries of cards. wild.
 hearts = {
     1: "Ace of Hearts",
     2: "Two of Hearts",
@@ -91,7 +95,7 @@ class Card:
         # Score 1-11, invalid is set to 0
         # Num = 1-13, 0 if card is invalid
 
-        valid_card = True
+        self.valid_card = True
 
         # Score Valid? 1-11 valid
         if s > 11 or s < 1:
@@ -100,19 +104,19 @@ class Card:
         # Suit Valid? 1-4 valid
         if su > 4 or su < 1:
             su = 0
-            valid_card = False
+            self.valid_card = False
 
         # Number Card Valid? 1-13 valid
         if n > 13 or n < 1:
             n = 0
-            valid_card = False
+            self.valid_card = False
 
         self.score = s
         self.suit = su
         self.num = n
         self.title = ''
 
-        if valid_card:
+        if self.valid_card:
             # Calculate title
             self.title = card_number[self.num] + suit[self.suit]
 

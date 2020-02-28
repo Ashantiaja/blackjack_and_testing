@@ -13,18 +13,32 @@ class TestCards(unittest.TestCase):
         t = Card(58, 1,1)
         self.assertEqual(t.score, 0)
 
+        t = Card(-5, 1,1)
+        self.assertEqual(t.score, 0)
+
     def test_invalid_num(self):
         t = Card(1, 14,1)
+        self.assertEqual(t.num,0)
+
+        t = Card(1, -1,1)
         self.assertEqual(t.num,0)
 
     def test_invalid_suit(self):
         t = Card(1, 1, 15)
         self.assertEqual(t.suit, 0)
 
+        t = Card(1, 1, -1000)
+        self.assertEqual(t.suit, 0)
 
     def test_correct_card_initialization(self):
         t = Card(1, 10, 2) # Ten of Spades
         self.assertEqual(t.title, "Ten of Spades")
+
+    def test_card_knows_if_its_valid(self):
+        t = Card()
+        self.assertEqual(t.valid_card, False)
+        validCard = Card(1,1,1)
+        self.assertEqual(validCard.valid_card, True)
         
 
 
