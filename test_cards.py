@@ -3,7 +3,7 @@ from cards import Card
 
 class TestCards(unittest.TestCase):
     def setUp(self):
-        pass
+        self.valid_card = Card(1,1,1)
 
     def tearDown(self):
         pass
@@ -37,8 +37,7 @@ class TestCards(unittest.TestCase):
     def test_card_knows_if_its_valid(self):
         t = Card()
         self.assertEqual(t.valid_card, False)
-        validCard = Card(1,1,1)
-        self.assertEqual(validCard.valid_card, True)
+        self.assertEqual(self.valid_card.valid_card, True)
         
 
 
