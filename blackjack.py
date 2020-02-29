@@ -6,6 +6,5 @@ from card_dealer import CardDealer
 import cards
 
 print(cards.hearts[13])
-
 x = cards.Card()
 print(x.valid_card)

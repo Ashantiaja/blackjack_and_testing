@@ -1,3 +1,6 @@
+# test_dealer.py
+# @author : Ash Yveth Cudiamat
+
 import unittest
 from card_dealer import CardDealer
 from cards import Card
@@ -42,16 +45,17 @@ class TestDealer(unittest.TestCase):
         self.assertFalse(self.tDealer.set_card_in_play(testCard))
 
     def test_remove_valid_card_from_play(self):
+        fiveOfSpades = Card(1,5,2)
         self.tDealer.spades_in_play[4] = True # Five of Spades
-        self.assertTrue(self.tDealer.remove_card_from_play(5,2))
+        self.assertTrue(self.tDealer.remove_card_from_play(fiveOfSpades))
         self.assertFalse(self.tDealer.spades_in_play[4])
 
     def test_remove_invalid_card_from_play(self):
         # Card isn't in play already
-        self.assertFalse(self.tDealer.remove_card_from_play(1,1))
+        self.assertFalse(self.tDealer.remove_card_from_play(Card(1,1,1)))
 
         # Card input isn't valid
-        self.assertFalse(self.tDealer.remove_card_from_play(15,15))
+        self.assertFalse(self.tDealer.remove_card_from_play(Card(0,0,0)))
 
     def test_valid_card_num_and_suit(self):
         i = 0
@@ -68,8 +72,10 @@ class TestDealer(unittest.TestCase):
         unusedCard = Card(1,3,2) # Three of Spades
         self.tDealer.set_card_in_play(playCard)
 
-        self.assertTrue(self.tDealer.in_use(playCard.num,playCard.suit))
-        self.assertFalse(self.tDealer.in_use(unusedCard.num,unusedCard.suit))
+        '''self.assertTrue(self.tDealer.in_use(playCard.num,playCard.suit))
+        self.assertFalse(self.tDealer.in_use(unusedCard.num,unusedCard.suit))'''
+        self.assertTrue(self.tDealer.in_use(playCard))
+        self.assertFalse(self.tDealer.in_use(unusedCard))
 
     def test_dealt_cards_are_valid(self):
         myDeck = list()
@@ -78,8 +84,6 @@ class TestDealer(unittest.TestCase):
         myDeck.append(self.tDealer.deal_card())
 
         for i in range(0,len(myDeck)):
-            self.assertTrue(self.tDealer.in_use(
-                myDeck[i].num, myDeck[i].suit))
             self.assertTrue(myDeck[i].valid_card)
             #print(myDeck[i].title)
         #self.tDealer.show_cards_in_play()

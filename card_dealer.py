@@ -4,7 +4,6 @@
 from cards import Card
 from random import randrange
 
-
 class CardDealer:
 
     # hearts[1] = hearts_in_play[0]
@@ -35,22 +34,24 @@ class CardDealer:
         ''' returns a tuple representing a random card (unchangeable) (cardNumber, suit)'''
         return (randrange(1,14), randrange(1,5))
 
-    def in_use(self, num, suit):
+    # Card Argument Version
+    def in_use(self, card):
         ''' returns true if the card is in play already
             returns false if card is invalid or not in use'''
-        if(num > 13) or (num < 1):
+        if(card.num > 13) or (card.num < 1):
             return False
-        list_num = num-1
-        if(suit == 1):
+        list_num = card.num-1
+
+        if(card.suit == 1):
             if(self.hearts_in_play[list_num] == True):
                 return True
-        elif (suit == 2):
+        elif (card.suit == 2):
             if(self.spades_in_play[list_num] == True):
                 return True
-        elif (suit == 3):
+        elif (card.suit == 3):
             if(self.clubs_in_play[list_num] == True):
                 return True
-        elif (suit == 4):
+        elif (card.suit == 4):
             if(self.diamonds_in_play[list_num] == True):
                 return True
 
@@ -83,7 +84,7 @@ class CardDealer:
         # made
         while True:
             cardVal = self.gen_card_values()
-            if not self.in_use(cardVal[0], cardVal[1]):
+            if not self.in_use(Card(1,cardVal[0],cardVal[1])):
                 break
         score = cardVal[0]
         if cardVal[0] > 10:
@@ -97,29 +98,31 @@ class CardDealer:
         # Give the card away
         return dealCard
 
-    def remove_card_from_play(self, num, suit):
+    def remove_card_from_play(self, removeCard):
         # Valid input
-        if (num < 1 or num > 13 or
-            suit < 1 or suit > 4):
+        #print(str(removeCard.num) + " " + str(removeCard.suit))
+        if (removeCard.num < 1 or removeCard.num > 13 or
+            removeCard.suit < 1 or removeCard.suit > 4):
             return False
-        arrayNum = num-1
 
-        if suit == 1:
+        arrayNum = removeCard.num-1
+
+        if removeCard.suit == 1:
             if(self.hearts_in_play[arrayNum] == True):
                 self.hearts_in_play[arrayNum] = False
                 return True
             return False
-        elif suit == 2:
+        elif removeCard.suit == 2:
             if(self.spades_in_play[arrayNum] == True):
                 self.spades_in_play[arrayNum] = False
                 return True
             return False
-        elif suit == 3:
+        elif removeCard.suit == 3:
             if(self.clubs_in_play[arrayNum] == True):
                 self.clubs_in_play[arrayNum] = False
                 return True
             return False
-        elif suit == 4:
+        elif removeCard.suit == 4:
             if(self.diamonds_in_play[arrayNum] == True):
                 self.diamonds_in_play[arrayNum] = False
                 return True
