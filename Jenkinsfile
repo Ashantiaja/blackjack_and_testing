@@ -36,7 +36,7 @@ pipeline {
 	    }
 	    post {
 	        success {
-		    archiveArtifacts "${env.BUILD_ID}/htmlcov/index.html"
+		    archiveArtifacts "htmlcov/index.html"
 		}
 	    }
 	}
