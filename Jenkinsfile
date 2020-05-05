@@ -34,6 +34,11 @@ pipeline {
 		    sh 'python3 -m coverage html'
 		}
 	    }
+	    post {
+	        success {
+		    archiveArtifacts "${env.BUILD_ID}/htmlcov/index.html"
+		}
+	    }
 	}
     }
 }
