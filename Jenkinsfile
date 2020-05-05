@@ -49,7 +49,7 @@ pipeline {
             steps {
                 dir(path: env.BUILD_ID) {
                     unstash(name: 'compiled-results')
-                    sh 'docker run --rm -v "$(pwd):/src/" cdrx/pyinstaller-linux:latest'
+                    sh 'docker run --rm -v "$(pwd)/source_files:/src/" cdrx/pyinstaller-linux:latest'
                 }
             }
 	    post {
