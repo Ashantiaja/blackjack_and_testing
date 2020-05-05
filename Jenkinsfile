@@ -29,9 +29,9 @@ pipeline {
 		    sh 'pip install coverage'
 		    sh 'PATH=$PATH:/var/jenkins_home/workspace/blackjack_pipeline@2/.local/bin:/var/jenkins_home/workspace/blackjack_pipeline@2/.local/lib/python3.5/site-packages'
 		    sh 'pip install pytest'
-		    sh 'coverage run --source=source_files/ -m pytest'
-		    sh 'coverage report'
-		    sh 'coverage html'
+		    sh 'python3 -m coverage run --source=source_files/ -m pytest'
+		    sh 'python3 -m coverage report'
+		    sh 'python3 -m coverage html'
 		}
 	    }
 	}
