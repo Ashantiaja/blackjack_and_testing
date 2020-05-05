@@ -12,9 +12,11 @@ pipeline {
 	}
     
 	stage ('Build') {
-	    sh 'source virtual/bin/activate'
-	    sh 'pip install pyinstaller'
-	    sh 'pyinstaller source_files/ui.py'
+	    steps {
+	        sh 'source virtual/bin/activate'
+	    	sh 'pip install pyinstaller'
+	    	sh 'pyinstaller source_files/ui.py'
+	    }
 	}
     }
 }
