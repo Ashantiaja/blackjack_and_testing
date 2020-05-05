@@ -1,19 +1,19 @@
 # test_dealer.py
 # @author : Ash Yveth Cudiamat
 
-import unittest
+import pytest
 import blackjack
 from cards import Card
 from player_blackjack import PlayerBlackJack
 from player_blackjack import PlayerStates
 
-class TestBlackJack(unittest.TestCase):
-    def setUp(self):
+class TestBlackJack:
+    def setup_class(self):
         self.bljk = blackjack.BlackJack()
         self.randomPlayer = PlayerBlackJack()
         self.randomPlayer.key = 'Random Player'
 
-    def tearDown(self):
+    def teardown_class(self):
         self.bljk.new_game()
 
     def test_new_game(self):
@@ -27,10 +27,10 @@ class TestBlackJack(unittest.TestCase):
         self.bljk.players.append(b)
         self.bljk.new_game()
 
-        self.assertEqual(len(self.bljk.players), 0)
-        self.assertEqual(len(self.bljk.dealer.deck), 0)
-        self.assertEqual(len(self.bljk.players_rounds_won), 0)
-        self.assertEqual(self.bljk.dealer_wins, 0)
+        assert len(self.bljk.players) == 0
+        assert len(self.bljk.dealer.deck) == 0
+        assert len(self.bljk.players_rounds_won) == 0
+        assert self.bljk.dealer_wins == 0
 
     def test_new_round(self):
         # Each player should have an empty deck
@@ -44,17 +44,18 @@ class TestBlackJack(unittest.TestCase):
         self.bljk.players.append(b)
         self.bljk.new_round()
 
-        self.assertEqual(len(self.bljk.players[0].deck), 0)
-        self.assertEqual(len(self.bljk.players[1].deck), 0)
-        self.assertEqual(len(self.bljk.dealer.deck), 0)
+        assert len(self.bljk.players[0].deck) == 0
+        assert len(self.bljk.players[1].deck) == 0
+        assert len(self.bljk.dealer.deck) == 0
         
 
     def test_add_player(self):
         # add player func returns true with successful addition
         # also check player list to ensure success
-        self.assertFalse(self.bljk.add_player(10))
-        self.assertTrue(self.bljk.add_player("Danny Devito"))
-        self.assertEqual(self.bljk.players[0].key, "Danny Devito")
+        self.bljk.new_game()
+        assert self.bljk.add_player(10) == False
+        assert self.bljk.add_player("Danny Devito") == True
+        assert self.bljk.players[0].key == "Danny Devito"
         
     def test_generate_init_cards(self):
         # Check that 2 cards are created for each player & dealer
@@ -64,23 +65,26 @@ class TestBlackJack(unittest.TestCase):
         self.bljk.players.append(aPlayer)
         self.bljk.deal_init_round_cards()
 
-        self.assertEqual(len(self.bljk.dealer.deck), 2)
+        assert len(self.bljk.dealer.deck) == 2
         for i in range(0, len(self.bljk.players)):
-            self.assertEqual(len(self.bljk.players[i].deck), 2)
+            assert len(self.bljk.players[i].deck) == 2
 
     def test_update_player_state(self):
+        self.bljk.new_game()
         self.randomPlayer.score = 30
         self.bljk.players.append(self.randomPlayer)
         self.bljk.update_player_state(self.bljk.players[0])
 
-        self.assertEqual(self.bljk.players[0].state, PlayerStates[1])
+        assert self.bljk.players[0].state == PlayerStates[1]
 
         self.bljk.dealer.score = 1
         self.bljk.update_player_state(self.bljk.dealer)
 
-        self.assertEqual(self.bljk.dealer.state, PlayerStates[0])
+        assert self.bljk.dealer.state == PlayerStates[0]
 
     def test_dead_player_taking_turn(self):
+        self.bljk.new_game()
+        self.randomPlayer.clear_deck()
         a = Card(10,10,1) # Ten of Hearts
         b = Card(10,10,2) # Ten of Spades
         c = Card(10,10,3) # Ten of Clubs
@@ -92,16 +96,14 @@ class TestBlackJack(unittest.TestCase):
         self.bljk.input_turn(self.bljk.players[0], True)
 
         # Despite the hit, player should still only have 3 cards
-        self.assertEqual(len(self.bljk.players[0].deck), 3)
+        assert len(self.bljk.players[0].deck) == 3
         
 
     def test_player_takes_turn_successfully(self):
+        self.bljk.new_game()
+        self.randomPlayer = PlayerBlackJack()
         self.bljk.players.append(self.randomPlayer)
         self.bljk.input_turn(self.bljk.players[0], True)
 
         # One card should be in the player's deck since they hit
-        self.assertEqual(len(self.bljk.players[0].deck), 1)
-
-
-if __name__ == '__main__':
-    unittest.main()
+        assert len(self.bljk.players[0].deck) == 1

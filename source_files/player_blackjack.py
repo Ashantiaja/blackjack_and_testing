@@ -28,7 +28,6 @@ class PlayerBlackJack:
         self.score = 0
         for i in range(0, len(self.deck)):
             self.score += self.deck[i].score
-            print(self.score)
         return self.score
                        
     def clear_deck(self):

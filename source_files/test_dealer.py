@@ -16,7 +16,7 @@ class TestDealer:
     @classmethod
     def teardown_class(self):
         self.tDealer.remove_all_cards_in_play()
-
+        
     def test_remove_cards_in_play(self):
         # 1 card from each suit is set into play
         self.tDealer.hearts_in_play[randrange(0,13)] = True

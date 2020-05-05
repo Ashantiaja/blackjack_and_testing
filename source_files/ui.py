@@ -40,6 +40,7 @@ class UI:
         print("Goodbye.")
 
     def play_round(self):
+        print("")
         self.bljk.deal_init_round_cards()
 
         # Expose one of dealer's cards and show player's deck
@@ -62,6 +63,7 @@ class UI:
                 self.bljk.input_turn(self.bljk.players[0], True)
             else:
                 stay = True
+            print("")
 
         # Check if player is still alive, dealer gets point if player is dead
         if(self.bljk.players[0].state == PlayerStates[1]):
