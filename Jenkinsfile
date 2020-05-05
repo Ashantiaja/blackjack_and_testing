@@ -22,9 +22,7 @@ pipeline {
 		}
 	    }
 	    steps {
-	    	sh 'python3 -m venv virtual'
-		sh 'source virtual/bin/activate'
-		sh 'deactivate'
+	    	sh 'pip install coverage'
 	    }
 	}
     }
