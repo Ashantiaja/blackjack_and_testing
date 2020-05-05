@@ -54,7 +54,7 @@ pipeline {
             }
 	    post {
 	        success {
-		    sh 'ls'
+		    sh 'ls/41'
 		    archiveArtifacts "${env.BUILD_ID}/sources/dist/ui"
 		}
 	    }
