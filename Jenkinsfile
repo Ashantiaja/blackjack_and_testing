@@ -16,6 +16,9 @@ pipeline {
 	}
 
 	stage ('Test') {
+	    environment {
+	        COVPATH = './.local/lib/python3.5/site-packages'
+	    }
 	    agent {
 	        docker {
 		    image 'python:3.5.9-buster'
@@ -26,9 +29,9 @@ pipeline {
 		    sh 'pip install coverage'
 		    sh 'PATH=$PATH:/var/jenkins_home/workspace/blackjack_pipeline@2/.local/bin'
 		    sh 'pip install pytest'
-		    sh 'coverage run --source=source_files/ -m pytest'
-		    sh 'coverage report'
-		    sh 'coverage html'
+		    sh '$COVPATH/coverage run --source=source_files/ -m pytest'
+		    sh '$COVPATH/coverage report'
+		    sh '$COVPATH/coverage html'
 		}
 	    }
 	}
