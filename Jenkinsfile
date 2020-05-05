@@ -1,9 +1,6 @@
 pipeline {
     agent any
     stages {
-    	stage('Build Dependencies?') {
-	
-	}
 
         stage('Test') {
 	    steps {
