@@ -6,6 +6,7 @@ python3 test_blackjack.py
 python3 test_dealer.py
 python3 test_cards.py
 
+When using Jenkins, make sure to use bash not sh.
 
 For running docker commands in Jenkins
 
