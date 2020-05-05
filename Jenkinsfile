@@ -4,6 +4,7 @@ pipeline {
 
         stage('Test') {
 	    steps {
+	    	sh 'python3 -m venv virtual'
 	        sh 'source virtual/bin/activate'
 		sh 'pip install coverage'
 		sh 'coverage run --source=source_files/ -m pytest'
