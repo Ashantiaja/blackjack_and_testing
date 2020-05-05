@@ -43,7 +43,7 @@ pipeline {
 
 	stage ('Deploy') {
     	    environment {
-                VOLUME = '$(pwd)/source_files:/src'
+                VOLUME = '$(pwd)/source_files'
                 IMAGE = 'cdrx/pyinstaller-linux:python2'
             }
             steps {
