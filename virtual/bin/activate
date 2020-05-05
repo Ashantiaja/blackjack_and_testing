@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelavent variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/acudiamat/Desktop/blackjack_and_testing/virtual"
+VIRTUAL_ENV="/home/acudiamat/blackjack_and_testing/virtual"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

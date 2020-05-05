@@ -32,7 +32,7 @@ end
 # unset irrelavent variables
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/home/acudiamat/Desktop/blackjack_and_testing/virtual"
+set -gx VIRTUAL_ENV "/home/acudiamat/blackjack_and_testing/virtual"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH
