@@ -5,7 +5,7 @@ pipeline {
 	stage ('Build') {
 	    agent {
 	        dockerfile {
-		    args '-t blackjack:latest'
+		    args '--rm -t blackjack:latest'
 		}
 	    }
 	    steps {
