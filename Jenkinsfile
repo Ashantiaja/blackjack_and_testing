@@ -42,15 +42,19 @@ pipeline {
 	}
 
 	stage ('Deploy') {
-    	    agent {
-	        docker {
-		    image 'python:3.5.9-buster'
-		}
-	    }
-	    steps {
-	    	withEnv(["HOME=${env.WORKSPACE}"]) {
-		    sh 'python3 -m pip install pyinstaller'
-		    sh 'pyinstaller source_files/ui.py'
+    	    environment {
+                VOLUME = '$(pwd)/source_files:/src'
+                IMAGE = 'cdrx/pyinstaller-linux:python2'
+            }
+            steps {
+                dir(path: env.BUILD_ID) {
+                    unstash(name: 'compiled-results')
+                    sh "docker run --rm -v ${VOLUME} ${IMAGE} 'pyinstaller -F source_files/ui.py'"
+                }
+            }
+	    post {
+	        success {
+		    archiveArtifacts "dist/ui"
 		}
 	    }
 	}
