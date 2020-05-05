@@ -44,12 +44,12 @@ pipeline {
 	stage ('Deploy') {
     	    environment {
                 VOLUME = '$(pwd)/source_files'
-                IMAGE = 'cdrx/pyinstaller-linux:python2'
+                IMAGE = 'cdrx/pyinstaller-linux:latest'
             }
             steps {
                 dir(path: env.BUILD_ID) {
                     unstash(name: 'compiled-results')
-                    sh 'docker run --rm -v "$(pwd)/source_files:/src/" cdrx/pyinstaller-linux:latest'
+                    sh 'docker run --rm -v "$(pwd)/source_files:/src/" cdrx/pyinstaller-linux:latest "pyinstaller -F ui.py"'
                 }
             }
 	    post {
