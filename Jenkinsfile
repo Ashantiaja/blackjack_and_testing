@@ -54,7 +54,7 @@ pipeline {
             }
 	    post {
 	        success {
-		    sh 'ls dist'
+		    sh 'ls'
 		    archiveArtifacts "dist/linux/ui/ui"
 		}
 	    }
