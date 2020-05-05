@@ -22,7 +22,9 @@ pipeline {
 		}
 	    }
 	    steps {
-	    	sh 'pip install coverage'
+	    	withEnv(["HOME=${env.WORKSPACE}"]) {
+		    sh 'pip install coverage'
+		}
 	    }
 	}
     }
