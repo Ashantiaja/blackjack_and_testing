@@ -55,7 +55,7 @@ pipeline {
 	    post {
 	        success {
 		    sh 'ls'
-		    archiveArtifacts "build/ui/ui"
+		    archiveArtifacts "${env.BUILD_ID}/sources/dist/ui"
 		}
 	    }
 	}
