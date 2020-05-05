@@ -24,6 +24,8 @@ pipeline {
 	    steps {
 	    	withEnv(["HOME=${env.WORKSPACE}"]) {
 		    sh 'pip install coverage'
+		    sh 'PATH=$PATH:/var/jenkins_home/workspace/blackjack_pipeline@2/.local/bin'
+		    sh 'pip install pytest'
 		}
 	    }
 	}
