@@ -1,5 +1,6 @@
 
 When using Jenkins, make sure to use bash not sh.
+Requires docker to be installed
 
 Run both of the given docker commands:
 
@@ -15,3 +16,4 @@ docker container run --name jenkins --rm --detach --network jenkins --env DOCKER
 http://localhost:8080
 
 3) From Jenkins, build the project with the given Jenkinsfile pipeline. The coverage file and the executable will be artifacts.
+adh;kasfkasw
