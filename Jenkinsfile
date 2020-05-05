@@ -40,5 +40,19 @@ pipeline {
 		}
 	    }
 	}
+
+	stage ('Deploy') {
+    	    agent {
+	        docker {
+		    image 'python:3.5.9-buster'
+		}
+	    }
+	    steps {
+	    	withEnv(["HOME=${env.WORKSPACE}"]) {
+		    sh 'python3 -m pip install pyinstaller'
+		    
+		}
+	    }
+	}
     }
 }
