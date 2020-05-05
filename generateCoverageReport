@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# usage ex.: ./generateCoverageReport test_*.py
+
+rm coverageReport.txt
+touch coverageReport.txt
+
+# Get list of test files
+TEST_FILES=test_*.py
+echo "Creating coverage report for the following files: " $TEST_FILES
+
+for i in $TEST_FILES
+do
+	echo $i >> coverageReport.txt
+	coverage3 run $i
+	coverage3 report >> coverageReport.txt
+	echo "" >> coverageReport.txt
+done
+
+echo "Coverage report finished. See coverageReport.txt"
+
+# Ignore below line =========================================
+  	#HTML_FILES=""
+	#J=$i # Stores the name of test file being processed
+	# Cut out the front and end of $i
+	#J=${J#test_} # cut Front (test_ portion)
+	#J=${J%.py} # cut Back (.py portion)
+
+	#NEW_NAME=index_$J.html
+	#HTML_FILES="$HTML_FILES $NEW_NAME"
+
+	#mv htmlcov/index.html htmlcov/$NEW_NAME #Rename og index file
+	#mv htmlcov/$NEW_NAME . # Move to reg working directory
