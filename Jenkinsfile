@@ -50,7 +50,7 @@ pipeline {
 	    steps {
 	    	withEnv(["HOME=${env.WORKSPACE}"]) {
 		    sh 'python3 -m pip install pyinstaller'
-		    
+		    sh 'pyinstaller source_files/ui.py'
 		}
 	    }
 	}
