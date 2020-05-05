@@ -1,14 +1,10 @@
 pipeline {
     agent none
     stages {
-        stage('Build') {
-	    agent {
-	        docker {
-		    image 'python:3'
-		}
-	    }
+        stage('Test') {
 	    steps {
-	        sh 'python3 source_files/ui.py'
+	        sh 'chmod +x checkCoverage.sh'
+		sh './checkCoverage.sh'
 	    }
 	}
     }

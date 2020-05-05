@@ -6,25 +6,16 @@ python3 test_blackjack.py
 python3 test_dealer.py
 python3 test_cards.py
 
-Docker Jenkins Command
-
-docker container run --name jenkins --rm --detach ^
-  --network jenkins --env DOCKER_HOST=tcp://docker:2376 ^
-  --env DOCKER_CERT_PATH=/certs/client --env DOCKER_TLS_VERIFY=1 ^
-  --volume jenkins-data:/var/jenkins_home ^
-  --volume jenkins-docker-certs:/certs/client:ro ^
-  --volume "%HOMEDRIVE%%HOMEPATH%":/home ^
-  --publish 8080:8080 --publish 50000:50000 jenkinsci/blueocean
-
-http://localhost:8080
 
 For running docker commands in Jenkins
 
-docker container run --name jenkins-docker --rm --detach ^
-  --privileged --network jenkins --network-alias docker ^
-  --env DOCKER_TLS_CERTDIR=/certs ^
-  --volume jenkins-docker-certs:/certs/client ^
-  --volume jenkins-data:/var/jenkins_home ^
-  --volume "%HOMEDRIVE%%HOMEPATH%":/home ^
-  docker:dind
+docker container run --name jenkins-docker --rm --detach --privileged --network jenkins --network-alias docker --env DOCKER_TLS_CERTDIR=/certs --volume jenkins-docker-certs:/certs/client --volume jenkins-data:/var/jenkins_home docker:dind
+
+Docker Jenkins Command
+
+docker container run --name jenkins --rm --detach --network jenkins --env DOCKER_HOST=tcp://docker:2376 --env DOCKER_CERT_PATH=/certs/client --env DOCKER_TLS_VERIFY=1 --volume jenkins-data:/var/jenkins_home --volume jenkins-docker-certs:/certs/client:ro --publish 8080:8080 --publish 50000:50000 jenkinsci/blueocean
+
+http://localhost:8080
+
+
 
