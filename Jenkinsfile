@@ -49,12 +49,12 @@ pipeline {
             steps {
                 dir(path: env.BUILD_ID) {
                     unstash(name: 'compiled-results')
-                    sh "docker run --rm -v ${VOLUME} ${IMAGE} 'pyinstaller -F source_files/ui.py'"
+                    sh 'docker run --rm -v "$(pwd):/src/" cdrx/pyinstaller-linux:latest'
                 }
             }
 	    post {
 	        success {
-		    archiveArtifacts "dist/ui"
+		    archiveArtifacts "dist/linux/ui/ui"
 		}
 	    }
 	}
