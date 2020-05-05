@@ -22,7 +22,7 @@ pipeline {
 		}
 	    }
 	    steps {
-	    	sh 'python -m venv virtual'
+	    	sh 'python3 -m venv virtual'
 		sh 'source virtual/bin/activate'
 		sh 'deactivate'
 	    }
